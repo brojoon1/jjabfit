@@ -1,0 +1,71 @@
+# ───────────────────────────────────────────────
+# macOS / Windows 시스템 파일
+# ───────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ───────────────────────────────────────────────
+# Xcode 빌드 산출물 / 파생 데이터
+# ───────────────────────────────────────────────
+build/
+DerivedData/
+*.o
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.app
+
+# ───────────────────────────────────────────────
+# Xcode 사용자별 설정 (공유 불필요)
+# ───────────────────────────────────────────────
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+
+# Xcode 프로젝트 내부 워크스페이스 사용자 데이터
+**/xcshareddata/WorkspaceSettings.xcsettings
+*.xcworkspace/xcuserdata/
+
+# ───────────────────────────────────────────────
+# Swift Package Manager
+# ───────────────────────────────────────────────
+.build/
+.swiftpm/
+Packages/
+Package.resolved
+*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+
+# ───────────────────────────────────────────────
+# CocoaPods / Carthage (사용 시)
+# ───────────────────────────────────────────────
+Pods/
+Carthage/Build/
+
+# ───────────────────────────────────────────────
+# 기타
+# ───────────────────────────────────────────────
+*.log
+*.tmp
+*.swp
+*~
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
