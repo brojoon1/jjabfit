@@ -1,0 +1,36 @@
+# Codemagic 빌드 설정 (GitHub Actions 대체용)
+# codemagic.io 에서 이 저장소를 연결하면 자동으로 이 파일을 인식합니다.
+# 무료 macOS 빌드(월 500분)로 서명 없는 IPA를 생성합니다.
+
+workflows:
+  ios-unsigned:
+    name: jjabfit unsigned IPA
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+    environment:
+      xcode: latest
+    scripts:
+      - name: 빌드 (코드 서명 없이)
+        script: |
+          set -o pipefail
+          xcodebuild \
+            -project JjabFit.xcodeproj \
+            -scheme JjabFit \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            clean build
+      - name: IPA 패키징
+        script: |
+          APP_PATH="build/Build/Products/Release-iphoneos/JjabFit.app"
+          if [ ! -d "$APP_PATH" ]; then echo "빌드 결과물(.app)을 찾을 수 없습니다"; exit 1; fi
+          mkdir -p Payload
+          cp -R "$APP_PATH" Payload/JjabFit.app
+          zip -qry JjabFit.ipa Payload
+          ls -lh JjabFit.ipa
+    artifacts:
+      - JjabFit.ipa
