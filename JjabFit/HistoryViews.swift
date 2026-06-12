@@ -35,9 +35,15 @@ struct LoadListView: View {
                     .scrollIndicators(.hidden)
                 }
             }
-            .navigationDestination(item: $detailRecord) { rec in
-                WorkoutDetailBody(record: rec, mode: .load, onBack: { detailRecord = nil })
-                    .navigationBarHidden(true)
+            // iOS 16 호환: navigationDestination(item:)는 iOS 17+ 라 isPresented 방식 사용
+            .navigationDestination(isPresented: Binding(
+                get: { detailRecord != nil },
+                set: { if !$0 { detailRecord = nil } }
+            )) {
+                if let rec = detailRecord {
+                    WorkoutDetailBody(record: rec, mode: .load, onBack: { detailRecord = nil })
+                        .navigationBarHidden(true)
+                }
             }
         }
     }
